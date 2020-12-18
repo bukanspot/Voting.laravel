@@ -219,6 +219,9 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chartist JS -->
   <script src={{asset('admin/assets/js/plugins/chartist.min.js')}}></script>
+  
+  <script src={{asset('pemilih/assets/js/dist/Chart.min.js')}} type="text/javascript"></script>
+  <script src={{asset('pemilih/assets/js/dist/utils.js')}} type="text/javascript"></script>
   <!--  Notifications Plugin    -->
   <script src={{asset('admin/assets/js/plugins/bootstrap-notify.js')}}></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

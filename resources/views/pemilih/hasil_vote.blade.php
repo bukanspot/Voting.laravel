@@ -81,27 +81,39 @@
   <div class="main main-raised">
     <div class="container">
 
-       <div class="section text-center">
-       <div class="row">
-          <div class="col-md-8 ml-auto mr-auto">
-            <div class="card card-chart">
-                        <div class="card-header card-header-rose">
-                        <canvas id="canvas" style="color:aliceblue"></canvas>
-                        </div>
-                        <div class="card-body">
-                        <h4 class="card-title">Hasil Pemilihan</h4>
-                        <p class="card-category">Waktu</p>
-                        </div>
-                        <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">access_time</i> time stamp
-                        </div>
-                        </div>
-                    
-                    </div>
-          </div>
+     
+        @if (!$calon==null && !$hasil==null)
+          <div class="section text-center">
+            <div class="row">
+            <div class="col-md-9 ml-auto mr-auto">
+              <div class="card card-chart">
+                          <div class="card-header card-header-rose">
+                          <canvas id="canvas" style="color:aliceblue"></canvas>
+                          </div>
+                          <div class="card-body">
+                          <h4 class="card-title">Hasil Pemilihan</h4>
+                          <p class="card-category">Waktu</p>
+                          </div>
+                          <div class="card-footer">
+                          <div class="stats">
+                              <i class="material-icons">access_time</i> time stamp
+                          </div>
+                          </div>
+                      
+                      </div>
+              </div>
         </div>
-      </div>
+        </div>
+        @else
+            <div class="row">
+                            <div class="col-md-12">
+                              <div class="alert alert-danger">
+							                  <div>Data kosong</div>
+					                  	</div>
+                            </div>
+                        </div>
+        @endif
+      
       
       <div class="section section-contacts">
 

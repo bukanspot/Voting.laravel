@@ -126,7 +126,7 @@
               @elseif($inRange)
                          <div class="col-md-12">
                               <h2>
-                                Waktu Belum melakukan Votin
+                                Waktu belum melakukan Voting
                               </h2>
                          </div>            
               @else
@@ -152,11 +152,12 @@
                   </div>
                 </div>
               </div>
+              </div>
              @endforeach
            
             @endif    
             
-          </div>
+          
         </div>
       </div>
        <div class="section text-center">

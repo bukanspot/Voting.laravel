@@ -26,6 +26,7 @@ Route::get('/admin/home','AdminController@home')->name("admin.home");
 Route::get('/admin/setting','AdminController@setting');
 Route::get('/admin/chart','AdminController@chart');
 Route::get('/admin/pemilihan','AdminController@pemilihan');
+Route::get('/admin/pemilihan_pdf','AdminController@pdf_pemilih');
 Route::get('/admin/setting/edit/{id}','AdminController@edit_setting');
 Route::put('/admin/setting/{id}','AdminController@update_setting');
 

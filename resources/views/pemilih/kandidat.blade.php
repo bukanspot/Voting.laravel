@@ -120,7 +120,15 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          
+          @if (!$pemilihan->isEmpty())
+               <div class="col-md-12">
+                              <h2>
+                                Anda sudah melakukan Voting
+                              </h2>
+                         </div> 
+          @else
+              <div class="row">
             <div class="col-md-8 ml-auto mr-auto text-center">
               <form action="../vote/{{$calon->id}}" method="post">
                      @csrf
@@ -131,7 +139,8 @@
                 </form>
                 
             </div>
-        </div>
+          </div>
+          @endif
           
         </div>
         

@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\setting_waktu;
 use App\Calon;
 use App\pemilihan;
+use App\pemilih;
 use DB;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -15,8 +17,12 @@ class AdminController extends Controller
         if(!$request->session()->has('user')){
            return redirect('/admin/login');
         }else{
-            
-            return view('admin.home');
+            $count_pemilih = DB::table('pemilihs')->count()?? 0;
+            $count_pemilihan = DB::table('pemilihans')->count()?? 0;
+            $count_calon = DB::table('calons')->count()?? 0;
+            $data_pem = DB::table('pemilihs')->limit(5) ->orderBy('created_at', 'desc')->get();
+            $data_calon = DB::table('calons')->limit(5)->get();
+            return view('admin.home',compact('count_pemilih','count_pemilihan','count_calon','data_pem','data_calon'));
         }
     }
 
@@ -36,14 +42,17 @@ class AdminController extends Controller
         if(!$request->session()->has('user')){
            return redirect('/admin/login');
         }else{
-           $calon = DB::table('calons')->pluck('nama')->toJson();
-            $data = DB::select('select count(id_pemilih) as "suara" from pemilihans group by id_calon');
-            
+            $calon = DB::table('calons')->pluck('nama')->toJson()?? null;
+            $data = DB::select('select count(id_pemilih) as "suara" from pemilihans RIGHT JOIN calons on calons.id = pemilihans.id_calon group by id_calon ORDER by calons.id ASC')?? null;
+            $data_suara  = DB::select('select calons.nama,count(id_pemilih) as "suara" from pemilihans RIGHT JOIN calons on calons.id = pemilihans.id_calon group by calons.nama ORDER by calons.id ASC')?? null;
+            $count_pemilihan = DB::table('pemilihans')->count()?? 0;
+
             for ($i=0; $i < count($data); $i++) { 
                 $hasil1[$i] = $data[$i]->suara;
             }
             $hasil = json_encode($hasil1);
-            return view('admin.chart',compact('hasil','calon'));
+           
+            return view('admin.chart',compact('hasil','calon','data_suara','count_pemilihan'));
         }
         
     }
@@ -79,5 +88,12 @@ class AdminController extends Controller
        
         $pemilih = DB::table('pemilihans')->rightJoin('pemilihs','pemilihans.id_pemilih','=','pemilihs.id')->paginate(15);
         return view('admin.pemilihan',compact('pemilih'));
+    }
+
+    public function pdf_pemilih()
+    {
+         $pemilih = DB::table('pemilihans')->rightJoin('pemilihs','pemilihans.id_pemilih','=','pemilihs.id')->get();
+         $pdf = PDF::loadview('admin.pemilih_pdf',compact('pemilih'));
+         return $pdf->stream();
     }
 }

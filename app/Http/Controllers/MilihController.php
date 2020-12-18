@@ -23,10 +23,11 @@ class MilihController extends Controller
             $new_awal = date("M d, Y H:i:s",strtotime($waktu_awal[0]));
             //'Sep 30, 2020 00:00:00'
             //dd($new);
-            if($today>$new && $today<$new_awal){
+            if($today<=$new && $today>=$new_awal){
                 $inRange=false;
             }else{
                  $inRange=true;
+                 dd($new);
             }
             $new = "'".$new."'";
             
@@ -38,11 +39,13 @@ class MilihController extends Controller
           if(!$request->session()->has('pemilih')){
            return redirect('/pemilih/login');
         }else{
+            $pemilih = $request->session()->get('pemilih');
+            $pemilihan = pemilihan::where('id_pemilih','=',$pemilih->id)->get();
             $data = Calon::where('id','=',$id)->get();
             $calon = $data[0];
-            $pemilih = $request->session()->get('pemilih');
            
-            return view('pemilih.kandidat',compact('calon','pemilih'));
+           
+            return view('pemilih.kandidat',compact('calon','pemilih','pemilihan'));
         }
        
     }
@@ -64,8 +67,8 @@ class MilihController extends Controller
        if(!$request->session()->has('pemilih')){
            return redirect('/pemilih/login');
         }else{
-            $calon = DB::table('calons')->pluck('nama')->toJson();
-            $data = DB::select('select count(id_pemilih) as "suara" from pemilihans group by id_calon');
+            $calon = DB::table('calons')->pluck('nama')->toJson()?? null;
+            $data = DB::select('select count(id_pemilih) as "suara" from pemilihans RIGHT JOIN calons on calons.id = pemilihans.id_calon group by id_calon ORDER by calons.id ASC')?? null;
             
             for ($i=0; $i < count($data); $i++) { 
                 $hasil1[$i] = $data[$i]->suara;

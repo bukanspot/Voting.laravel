@@ -27,6 +27,9 @@
                             </div>
                         </div>
                   @else
+                      <button class="btn btn-info btn-round" onclick="location.href='/admin/pemilihan_pdf'">
+                     <i class="material-icons">content_paste</i>  Print Data
+                   </button> 
                     <table class="table">
                       <thead class=" text-info">
                         <th>
