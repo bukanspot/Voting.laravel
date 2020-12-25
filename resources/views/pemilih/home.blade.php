@@ -70,7 +70,7 @@
         </button>
       </div>
       <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
+        <ul class="ml-auto navbar-nav">
           <li class="nav-item">
             <a class="nav-link" href="/logout/pemilih">
               <i class="material-icons">exit_to_app</i> Logout
@@ -84,7 +84,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="title text-center" id="demo">Batas Akhir Pemilihan</h1>
+          <h1 class="text-center title" id="demo">Batas Akhir Pemilihan</h1>
             <div class="row">
               <div class="col-md-2">
                 
@@ -106,7 +106,7 @@
   </div>
   <div class="main main-raised">
     <div class="container">
-      <div class="section text-center">
+      <div class="text-center section">
         <h2 class="title">Here is our Candidate</h2>
         <div class="team">
           <div class="row">
@@ -134,7 +134,7 @@
               <div class="col-md-5">
               <div class="team-player">
                 <div class="card card-plain">
-                  <div class="col-md-6 ml-auto mr-auto">
+                  <div class="ml-auto mr-auto col-md-6">
                     <img src={{asset('data_file/'.$i->foto)}} alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
                   </div>
                   <h4 class="card-title">{{$i->nama}}
@@ -160,9 +160,9 @@
           
         </div>
       </div>
-       <div class="section text-center">
+       <div class="text-center section">
         <div class="row">
-          <div class="col-md-8 ml-auto mr-auto">
+          <div class="ml-auto mr-auto col-md-8">
             <h2 class="title">Lihat Hasil </h2>
             <h5 class="description">This is the paragraph where you can write more details about your product. Keep you user engaged by providing meaningful information. Remember that by this time, the user is curious, otherwise he wouldn&apos;t scroll to get here. Add a button if you want the user to see more.</h5>
              <button class="btn btn-warning btn-round" style="width:50% !important" onclick="location.href='/livecount'">
@@ -203,13 +203,13 @@ const second = 1000,
       hour = minute * 60,
       day = hour * 24;
 
-let countDown = new Date({!! $new !!}).getTime(),
+let countDown = new Date({!! $waktu_akhir !!}).getTime(),
     x = setInterval(function() {
 
       let now = new Date().getTime(),
           distance = countDown - now;
 
-      document.getElementById('days').innerText = Math.floor(distance / (day)),
+        document.getElementById('days').innerText = Math.floor(distance / (day)),
         document.getElementById('hours').innerText = Math.floor((distance % (day)) / (hour)),
         document.getElementById('minutes').innerText = Math.floor((distance % (hour)) / (minute)),
         document.getElementById('seconds').innerText = Math.floor((distance % (minute)) / second);
