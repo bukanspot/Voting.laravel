@@ -22,7 +22,7 @@
   <link rel="icon" type="image/png" href={{asset('pemilih/assets/img/favicon.png')}}>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Musma Focus 2020
+    Musma Focus 2021
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -61,7 +61,7 @@
     <div class="container">
       <div class="navbar-translate">
         <a class="navbar-brand" href="/">
-          Musma Focus 2020 </a>
+          Musma Focus 2021 </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
           <span class="navbar-toggler-icon"></span>
@@ -70,7 +70,7 @@
         </button>
       </div>
       <div class="collapse navbar-collapse">
-        <ul class="ml-auto navbar-nav">
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" href="/logout/pemilih">
               <i class="material-icons">exit_to_app</i> Logout
@@ -84,7 +84,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="text-center title" id="demo">Batas Akhir Pemilihan</h1>
+          <h1 class="title text-center" id="demo">Batas Akhir Pemilihan</h1>
             <div class="row">
               <div class="col-md-2">
                 
@@ -106,7 +106,7 @@
   </div>
   <div class="main main-raised">
     <div class="container">
-      <div class="text-center section">
+      <div class="section text-center">
         <h2 class="title">Here is our Candidate</h2>
         <div class="team">
           <div class="row">
@@ -131,10 +131,10 @@
                          </div>            
               @else
              @foreach ($calon as $i)
-              <div class="col-md-5">
+              <div class="col-md-4">
               <div class="team-player">
                 <div class="card card-plain">
-                  <div class="ml-auto mr-auto col-md-6">
+                  <div class="col-md-6 ml-auto mr-auto">
                     <img src={{asset('data_file/'.$i->foto)}} alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
                   </div>
                   <h4 class="card-title">{{$i->nama}}
@@ -160,11 +160,11 @@
           
         </div>
       </div>
-       <div class="text-center section">
+       <div class="section text-center">
         <div class="row">
-          <div class="ml-auto mr-auto col-md-8">
+          <div class="col-md-8 ml-auto mr-auto">
             <h2 class="title">Lihat Hasil </h2>
-            <h5 class="description">This is the paragraph where you can write more details about your product. Keep you user engaged by providing meaningful information. Remember that by this time, the user is curious, otherwise he wouldn&apos;t scroll to get here. Add a button if you want the user to see more.</h5>
+            <h5 class="description"></h5>
              <button class="btn btn-warning btn-round" style="width:50% !important" onclick="location.href='/livecount'">
                      <i class="material-icons">how_to_vote</i> Lihat hasil suara
                    </button>  
@@ -203,13 +203,13 @@ const second = 1000,
       hour = minute * 60,
       day = hour * 24;
 
-let countDown = new Date({!! $waktu_akhir !!}).getTime(),
+let countDown = new Date({!! $new !!}).getTime(),
     x = setInterval(function() {
 
       let now = new Date().getTime(),
           distance = countDown - now;
 
-        document.getElementById('days').innerText = Math.floor(distance / (day)),
+      document.getElementById('days').innerText = Math.floor(distance / (day)),
         document.getElementById('hours').innerText = Math.floor((distance % (day)) / (hour)),
         document.getElementById('minutes').innerText = Math.floor((distance % (hour)) / (minute)),
         document.getElementById('seconds').innerText = Math.floor((distance % (minute)) / second);

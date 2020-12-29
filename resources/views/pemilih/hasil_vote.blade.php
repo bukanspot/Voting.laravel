@@ -22,7 +22,7 @@
   <link rel="icon" type="image/png" href={{asset('pemilih/assets/img/favicon.png')}}>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Musma Focus 2020
+    Musma Focus 2021
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -43,7 +43,7 @@
                      <i class="material-icons">keyboard_backspace</i> 
                    </button>  
         <a class="navbar-brand" href="/">
-          Musma Focus 2020 </a>
+          Musma Focus 2021 </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
           <span class="navbar-toggler-icon"></span>
@@ -89,14 +89,6 @@
               <div class="card card-chart">
                           <div class="card-header card-header-rose">
                           <canvas id="canvas" style="color:aliceblue"></canvas>
-                          </div>
-                          <div class="card-body">
-                          <h4 class="card-title">Hasil Pemilihan</h4>
-                          <p class="card-category">Waktu</p>
-                          </div>
-                          <div class="card-footer">
-                          <div class="stats">
-                              <i class="material-icons">access_time</i> time stamp
                           </div>
                           </div>
                       
