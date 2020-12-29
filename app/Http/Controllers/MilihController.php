@@ -8,9 +8,9 @@ use App\pemilihan;
 use DB;
 class MilihController extends Controller
 {
-    public function index(Request $request) {
-        if(!$request->session()->has('pemilih')){
-        return redirect('/pemilih/login');
+     public function index(Request $request) {
+          if(!$request->session()->has('pemilih')){
+           return redirect('/pemilih/login');
         }else{
             $calon = Calon::all();
             $pemilih = $request->session()->get('pemilih');
@@ -18,49 +18,54 @@ class MilihController extends Controller
             $pemilihan = pemilihan::where('id_pemilih','=',$pemilih->id)->get();
             $waktu_akhir = DB::table('setting_waktus')->pluck('waktu_akhir');
             $waktu_awal = DB::table('setting_waktus')->pluck('waktu_awal');
-            $today = strtotime(now());
-            $new = strtotime($waktu_akhir[0]);
-            $new_awal = strtotime($waktu_awal[0]);
+            $today = date("M d, Y H:i:s");
+            $new = date("M d, Y H:i:s",strtotime($waktu_akhir[0]));
+            $new_awal = date("M d, Y H:i:s",strtotime($waktu_awal[0]));
             //'Sep 30, 2020 00:00:00'
             //dd($new);
             if($today<=$new && $today>=$new_awal){
                 $inRange=false;
             }else{
                  $inRange=true;
-                //  dd($today);
+                 // dd($new);
             }
+            $new = "'".$new."'";
             
-            return view('pemilih.home',compact('calon','pemilihan','waktu_akhir','inRange'));
+            return view('pemilih.home',compact('calon','pemilihan','new','inRange'));
         }
     }   
 
-    public function kandidat(Request $request,$id) {
-        if(!$request->session()->has('pemilih')){
-        return redirect('/pemilih/login');
+     public function kandidat(Request $request,$id) {
+          if(!$request->session()->has('pemilih')){
+           return redirect('/pemilih/login');
         }else{
             $pemilih = $request->session()->get('pemilih');
             $pemilihan = pemilihan::where('id_pemilih','=',$pemilih->id)->get();
             $data = Calon::where('id','=',$id)->get();
             $calon = $data[0];
+           
+           
             return view('pemilih.kandidat',compact('calon','pemilih','pemilihan'));
         }
+       
     }
 
     public function vote(Request $request,$id) {
-        if(!$request->session()->has('pemilih')){
-            return redirect('/pemilih/login');
+          if(!$request->session()->has('pemilih')){
+           return redirect('/pemilih/login');
         }else{
             $pemilihan =  new pemilihan();
             $pemilihan->id_calon = $id;
             $pemilihan->id_pemilih = $request->pemilih;
-            $pemilihan->save();
+             $pemilihan->save();
             return redirect('/');
         }
+       
     }
 
-    public function hasil(Request $request) {
-        if(!$request->session()->has('pemilih')){
-            return redirect('/pemilih/login');
+   public function hasil(Request $request) {
+       if(!$request->session()->has('pemilih')){
+           return redirect('/pemilih/login');
         }else{
             $calon = DB::table('calons')->pluck('nama')->toJson()?? null;
             $data = DB::select('select count(id_pemilih) as "suara" from pemilihans RIGHT JOIN calons on calons.id = pemilihans.id_calon group by id_calon ORDER by calons.id ASC')?? null;
@@ -70,8 +75,9 @@ class MilihController extends Controller
             }
             $hasil = json_encode($hasil1);
             
-            return view('pemilih.hasil_vote',compact('hasil','calon'));
+              return view('pemilih.hasil_vote',compact('hasil','calon'));
         }
+       
     }
 
     public function login() {
